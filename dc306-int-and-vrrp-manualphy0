@@ -1,0 +1,17 @@
+export xr_mgmt1="localhost"
+export xr_mgmt2="localhost"
+export xr_port1="9001"
+export xr_port2="9002"
+
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export declare INT_VRF="DC306_CEE1_VRF"
+export declare arr_INT_NAME=("Bundle-Ether306" "Bundle-Ether306" "Bundle-Ether306" "Bundle-Ether306" "Bundle-Ether306")
+export declare arr_INT_DESC=("PHY0-210" "PHY0-211" "PHY0-212" "PHY0-213" "PHY0-214")
+export declare arr_VR_INT_NET=("u'172.20.10.0/24'" "u'172.20.11.0/24'" "u'172.20.12.0/24'" "u'172.20.13.0/24'" "u'172.20.14.0/24'")
+export declare arr_INT_VLAN=("210" "211" "212" "213" "214")
+export declare arr_INT_VRID=("210" "211" "212" "213" "214") ##Value of '0' means NO VRRP configured
+
+export PRIO_R1=("254")
+export PRIO_R2=("200")

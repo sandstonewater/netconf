@@ -1,0 +1,25 @@
+<config>
+  <router-static xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ip-static-cfg">
+   <default-vrf>
+    <address-family>
+     <vrfipv4>
+      <vrf-unicast>
+       <vrf-prefixes>
+        <vrf-prefix>
+         <prefix>{{DUMMY_PREFIX}}</prefix>
+         <prefix-length>32</prefix-length>
+         <vrf-route>
+          <vrf-next-hop-table>
+           <vrf-next-hop-interface-name>
+            <interface-name>{{TUN_NAME}}</interface-name>
+           </vrf-next-hop-interface-name>
+          </vrf-next-hop-table>
+         </vrf-route>
+        </vrf-prefix>
+       </vrf-prefixes>
+      </vrf-unicast>
+     </vrfipv4>
+    </address-family>
+   </default-vrf>
+  </router-static>
+</config>

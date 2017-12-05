@@ -1,0 +1,40 @@
+## ASR Login Credentials
+export xr_mgmt="localhost"
+export xr_user="admin"
+export xr_pass="ericsson"
+export xr_port="9002"
+
+
+## List of Compute Endpoints
+export dc_vpod_name="DC348_CEE1_" ##NO SPACES!!
+export declare arr_Compute_IP=("10.19.0.102" "10.19.0.68" "10.19.0.76")
+export declare arr_Compute_Name=("Compute-7-1" "Compute-5-1" "Compute-5-2")
+
+## Routing, MPLS and GRE parameters
+export static_route="" ##Only needed for Spine+Leaf setup
+export gre_src_add="192.168.51.2"
+export tunnel_base=34801
+export dummy_net="169.254.190.0/24"
+export mpls_label_base=202100
+export tun_offset="9" ##SET THIS TO 0 for new environment. 
+                  ##This should be non-zero only if adding new tunnels to an existing environment.
+
+## BGP parameters
+export csc_bgp_add="10.33.248.150"
+export bgp_in_policy=DC348_NH-WA-vPOD1 ##NO SPACES!!
+export bgp_out_policy=DC348_NH-WA-vPOD1 ##NO SPACES!!
+export bgp_us_int="Loopback3348"
+export bgp_local_as=100
+export bgp_csc_as=100
+
+##============END CONFIG VARIABLES===========================
+
+
+
+##COLORS
+export RESTORE='\033[0m'
+export YELLOW='\033[00;33m'
+export CYAN='\033[00;36m'
+export RED=$(tput setaf 1)
+export WHITE=$(tput setaf 7)
+export GREEN=$(tput setaf 2)

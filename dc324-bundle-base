@@ -1,0 +1,10 @@
+export xr_mgmt1="10.80.244.51"
+export xr_mgmt2="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export BUNDLE_NAME="Bundle-Ether324"
+export BUNDLE_DESC="Bundle-to-Pluribus-for-DC324" ##No spaces allowed!!!!####
+export declare arr_Bundle_Members=("TenGigE0/0/0/28" "TenGigE0/0/0/29")
+export INT_DESC="Bundle-Ether324-member-link"
+export BUNDLE_ID="324"

@@ -1,0 +1,24 @@
+<config>
+ <interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+  <interface-configuration>
+    <active>act</active>
+    <interface-name>{{INT_NAME}}</interface-name>
+    <interface-mode-non-physical>default</interface-mode-non-physical>
+    <description>{{INT_DESC}}</description>
+    <ipv4-network xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-io-cfg">
+     <addresses>
+      <primary>
+       <address>{{INT_IP}}</address>
+       <netmask>{{INT_IP_MASK}}</netmask>
+      </primary>
+     </addresses>
+    </ipv4-network>
+    <vlan-sub-configuration xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-l2-eth-infra-cfg">
+     <vlan-identifier>
+      <vlan-type>vlan-type-dot1q</vlan-type>
+      <first-tag>{{INT_VLAN}}</first-tag>
+     </vlan-identifier>
+    </vlan-sub-configuration>
+   </interface-configuration>
+ </interface-configurations>
+</config>

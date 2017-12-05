@@ -1,0 +1,23 @@
+## ASR Login Credentials
+export xr_mgmt="192.168.0.9"
+export xr_user="root"
+export xr_pass="root"
+
+## List of Compute Endpoints
+export declare arr_Compute_IP=("10.4.16.1" "10.3.16.17" "10.4.16.2" "10.4.16.4" "10.4.16.5")
+export declare arr_Compute_Name=("xrv-2" "compute-1-3.domain.tld" "xrv-3" "xrv-5" "xrv-6")
+
+## MPLS and GRE parameters
+export tunnel_base=1001
+export dummy_net="u'192.168.10.0/24'"
+export mpls_label_base=202001
+
+##BGP parameters
+export bgp_in_policy=PI2_NH_IN_GRE
+export bgp_out_policy=PI2_NH_OUT_GRE
+export bgp_local_as=65000
+export bgp_csc_as=65000
+export bgp_us_int="GigabitEthernet0/0/0/0"
+export gre_src_add="10.4.16.3"
+export csc_bgp_add="10.4.16.1"
+

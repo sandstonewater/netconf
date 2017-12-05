@@ -1,0 +1,7 @@
+##COLORS
+export RESTORE='\033[0m'
+export YELLOW='\033[00;33m'
+export CYAN='\033[00;36m'
+export RED=$(tput setaf 1)
+export WHITE=$(tput setaf 7)
+export GREEN=$(tput setaf 2)

@@ -1,0 +1,12 @@
+export xr_mgmt1="10.80.244.51"
+export xr_mgmt2="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export INT_NAME="Bundle-Ether306.201"
+export INT_DESC="cee_om_sp1"
+export INT_VRF="DC306_om_vr"
+export INT_IP1="10.33.189.130"
+export INT_IP2="10.33.189.131"
+export INT_IP_MASK="255.255.255.240"
+export INT_VLAN="201"

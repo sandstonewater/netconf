@@ -1,0 +1,23 @@
+## ASR Login Credentials
+export xr_mgmt="10.80.244.51"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+## List of Compute Endpoints
+export declare arr_Compute_IP=("10.5.0.55" "10.5.0.63" "10.5.0.75" "10.5.0.19" "10.5.0.9" "10.5.0.57" "10.5.0.21" "10.5.0.43" "10.5.0.39" "10.5.0.41" "10.5.0.15" "10.5.0.45" "10.5.0.17")
+export declare arr_Compute_Name=("compute-0-1" "compute-0-5" "compute-0-11" "compute-2-3" "compute-1-2" "compute-0-2" "compute-2-4" "compute-5-3" "compute-5-1" "compute-5-2" "compute-2-1" "compute-5-4" "compute-2-2")
+
+## MPLS and GRE parameters
+export gre_src_add="10.5.2.1"
+export tunnel_base=301
+export dummy_net="u'169.254.30.0/24'"
+export mpls_label_base=202031
+
+##BGP parameters
+export bgp_in_policy=DC300_NH-WA-vPOD3
+export bgp_out_policy=DC300_NH-WA-vPOD3
+export bgp_local_as=100
+export bgp_csc_as=100
+export bgp_us_int="Loopback3002"
+export csc_bgp_add="10.33.199.199"
+export route_reflector="yes"

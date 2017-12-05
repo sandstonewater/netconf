@@ -1,0 +1,12 @@
+         if next-hop in (10.19.0.102) then
+           set next-hop 169.254.190.10
+           pass
+         endif
+         if next-hop in (10.19.0.68) then
+           set next-hop 169.254.190.11
+           pass
+         endif
+         if next-hop in (10.19.0.76) then
+           set next-hop 169.254.190.12
+           pass
+         endif

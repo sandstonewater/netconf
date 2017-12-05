@@ -165,7 +165,7 @@ def do_templates(m, t_list, default_op='merge', **kwargs):
             m.edit_config(data,
                           format='xml',
                           target='candidate',
-                          default_operation=default_op)
+                          default_operation='merge')
         elif RUNNING:
             m.edit_config(data,
                           format='xml',

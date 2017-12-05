@@ -1,0 +1,13 @@
+export xr_mgmt1="10.80.244.51"
+export xr_mgmt2="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export declare INT_VRF="DC321_om_vr"
+export declare arr_INT_NAME=("Bundle-Ether321" "Bundle-Ether321" "Bundle-Ether321" "Bundle-Ether321")
+export declare arr_INT_DESC=("cee_om_sp2" "sdn_sig_sp2" "atlas_nbi_2" "atlas_sbi_2")
+export declare arr_INT_VLAN=("301" "132" "133" "134")
+export declare arr_VR_INT_NET=("u'10.33.202.176/28'" "u'10.33.202.192/29'" "u'10.33.202.200/29'" "u'10.33.202.208/29'")
+
+export PRIO_R1=("254")
+export PRIO_R2=("200")

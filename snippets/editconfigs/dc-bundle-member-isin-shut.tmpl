@@ -1,0 +1,19 @@
+<config>
+  <interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+   <interface-configuration>
+    <active>act</active>
+    <interface-name>{{INT_NAME}}</interface-name>
+    <shutdown nc:operation="delete"/>
+    <description>{{INT_DESC}}</description>
+    <bundle-member xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-bundlemgr-cfg">
+     <id>
+      <bundle-id>{{BUNDLE_ID}}</bundle-id>
+      <port-activity>active</port-activity>
+     </id>
+    </bundle-member>
+    <lacp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-bundlemgr-cfg">
+     <period-short>true</period-short>
+    </lacp>
+   </interface-configuration>
+  </interface-configurations>
+</config>

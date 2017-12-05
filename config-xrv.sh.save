@@ -1,0 +1,106 @@
+#!/bin/bash
+#!/usr/bin/python
+
+RESTORE='\033[0m'
+YELLOW='\033[00;33m'
+CYAN='\033[00;36m'
+RED=$(tput setaf 1)
+WHITE=$(tput setaf 7)
+GREEN=$(tput setaf 2)
+
+
+## Source all necessary user-input variables from this environment file
+. ~/ncc/env-ios-xr-3
+. ~/ncc/env-vrfs
+
+## Print status messages to console
+clear
+echo -e '\n'"=== Using following ios-xrv variables to build config...\n" ${RESTORE}
+cat ~/ncc/env-ios-xr
+echo -e '\n'"=== Connecting to IOS-XR mgmt interface:" ${CYAN}$xr_mgmt ${RESTORE}"==="
+
+## Check if BGP-inbound-template files exist already, if so, delete them, to create new template.
+[ -f ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl ] && rm ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl
+[ -f ~/ncc/snippets/editconfigs/tun-policy-in-final.tmpl ] && rm ~/ncc/snippets/editconfigs/tun-policy-in-final.tmpl
+
+## Print table headers for tunnel details
+echo -e '\n'${CYAN}"--- Building GRE/MPLS config...\n" ${YELLOW}
+printf "%-15s | %-20s | %-30s | %-15s | %-15s | %-15s" "Tunnel Name" "Tunnel Status" "Dest Compute Name" "Dest Compute IP" "Dummy Route" "MPLS Label"
+echo -e ${RESTORE}
+
+## Use for loop to apply config for Tunnels, dummy static routes and static mpls paths
+no_of_computes=${#arr_Compute_Name[@]} 
+j=0
+for i in ${arr_Compute_IP[@]}
+do
+  tunnel_number=$[$tunnel_base+$j]
+  tunnel_name="tunnel-ip$tunnel_number"
+  mpls_label=$[$mpls_label_base+$j]
+  dummy_static_net=`python -c 'import sys, ipaddress; net1=ipaddress.ip_network('$dummy_net'); print net1['$j+1']'`
+
+  current_compute=${arr_Compute_Name[$j]}
+
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-gre --params '{"TUN_NAME":"'$tunnel_name'","TUN_DEST":"'$i'"}'
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-static --params '{"DUMMY_PREFIX":"'$dummy_static_net'","TUN_NAME":"'$tunnel_name'"}'
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-mpls --params '{"TUN_NAME":"'$tunnel_name'","MPLS_LABEL":"'$mpls_label'", "DUMMY_PREFIX":"'$dummy_static_net'"}'
+
+  ##Check operational status of GRE tunnel##
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --get-oper --named-filter intf-brief --params '{"INTF_NAME":"'$tunnel_name'"}' > ~/ncc/tun-state
+  tun_state=$(grep -oPm1 "(?<=<line-state>)[^<]+" ~/ncc/tun-state)
+  if [ "$tun_state" == "im-state-down" ]; then
+    tun_color="${RED}$tun_state ${WHITE}"
+  else
+    tun_color="${GREEN}$tun_state ${WHITE}"
+  fi
+  printf "%-15s | %-30s | %-30s | %-15s | %-15s | %-15s\n" "$tunnel_name" "$tun_color" "$current_compute" "$i" "$dummy_static_net" "$mpls_label"
+  ##########################################
+
+  ##Build BGP inbound tunnel policy if statements##
+  cat ~/ncc/snippets/editconfigs/tun-policy-in-if.tmpl >> ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl
+  sed -i -e 's/{{TUN_DEST}}/'$i'/g' ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl
+  sed -i -e 's/{{DUMMY_PREFIX}}/'$dummy_static_net'/g' ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl
+  ###################################
+  ##python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-policy-in-final --params '{"BGP_IN_NAME":"'$bgp_in_policy'","TUN_DEST":"'$i'","DUMMY_PREFIX":"'$dummy_static_net'"}'
+
+  j=$[j+1]
+done
+
+
+echo -e '\n'${CYAN}"--- Building BGP config..." 
+echo -e '\t'${YELLOW}"Local AS:" ${WHITE}$bgp_local_as
+echo -e '\t'${YELLOW}"BGP Update Src Interface:" ${WHITE}$bgp_us_int
+echo -e '\t'${YELLOW}"CSC BGP neighbor IP:" ${WHITE}$csc_bgp_add
+echo -e '\t'${YELLOW}"CSC AS:" ${WHITE}$bgp_csc_as '\t' ${RESTORE}
+
+##Build BGP inbound template
+cat ~/ncc/snippets/editconfigs/tun-policy-in-start.tmpl >> ~/ncc/snippets/editconfigs/tun-policy-in-final.tmpl
+cat ~/ncc/snippets/editconfigs/tun-policy-in-if-sum.tmpl >> ~/ncc/snippets/editconfigs/tun-policy-in-final.tmpl
+cat ~/ncc/snippets/editconfigs/tun-policy-in-end.tmpl >> ~/ncc/snippets/editconfigs/tun-policy-in-final.tmpl
+
+## Apply BGP config and policies
+python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-policy-in-final --params '{"BGP_IN_NAME":"'$bgp_in_policy'"}'
+python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-policy-out --params '{"BGP_OUT_NAME":"'$bgp_out_policy'","TUN_SRC":"'$gre_src_add'"}'
+python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-bgp --params '{"BGP_LOCAL_AS":"'$bgp_local_as'","ROUTER_ID":"'$gre_src_add'","CSC_BGP_ADD":"'$csc_bgp_add'","BGP_REMOTE_AS":"'$bgp_csc_as'","BGP_US_INT":"'$bgp_us_int'","BGP_OUT_NAME":"'$bgp_out_policy'","BGP_IN_NAME":"'$bgp_in_policy'","DESCRIPTION":"BGP to CSC"}'
+
+
+##Apply VRF config
+echo -e '\n'${CYAN}"--- Building VRF config..."
+no_of_vrfs=${#arr_VRF_names[@]}
+j=0
+for z in ${arr_VRF_names[@]}
+do
+  current_vrf_rt=${arr_VRF_rts[$j]}
+  current_vrf_rt_as=$(echo $current_vrf_rt | cut -d':' -f1)
+  current_vrf_rt_index=$(echo $current_vrf_rt | cut -d':' -f2)
+##  echo $current_vrf_rt_as
+##  echo $current_vrf_rt_index
+  echo -e '\t'${GREEN}"VRF:" "Route Target:" $current_vrf_rt
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-vrfs --params '{"VRF_NAME":"'$z'","RT_AS":"'$current_vrf_rt_as'","RT_INDEX":"'$current_vrf_rt_index'"}'
+  python ~/ncc/ncc.py --host $xr_mgmt -u $xr_user -p $xr_pass --do-edits tun-bgp-vrfs --params '{"ROUTER_ID":"'$gre_src_add'","VRF_NAME":"'$z'","RT_AS":"'$current_vrf_rt_as'","RT_INDEX":"'$current_vrf_rt_index'"}'
+  j=$[j+1]
+done
+
+
+
+
+echo -e ${RESTORE} '\n' "=== All Config tasks completed, disconnected from IOS-XR ===" ${RESTORE} '\n'

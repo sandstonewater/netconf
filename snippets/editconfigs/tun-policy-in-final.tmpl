@@ -1,0 +1,32 @@
+<config>
+  <routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+   <route-policies>
+    <route-policy>
+     <route-policy-name>{{BGP_IN_NAME}}</route-policy-name>
+       <rpl-route-policy>route-policy {{BGP_IN_NAME}}
+         if next-hop in (10.4.16.1) then
+           set next-hop 192.168.10.1
+           pass
+         endif
+         if next-hop in (10.3.16.17) then
+           set next-hop 192.168.10.2
+           pass
+         endif
+         if next-hop in (10.4.16.3) then
+           set next-hop 192.168.10.3
+           pass
+         endif
+         if next-hop in (10.4.16.2) then
+           set next-hop 192.168.10.4
+           pass
+         endif
+         if next-hop in (10.4.16.5) then
+           set next-hop 192.168.10.5
+           pass
+         endif
+         end-policy
+       </rpl-route-policy>
+      </route-policy>
+    </route-policies>
+  </routing-policy>
+</config>

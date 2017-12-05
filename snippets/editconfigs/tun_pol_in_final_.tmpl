@@ -1,0 +1,12 @@
+<config>
+  <routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+   <route-policies>
+    <route-policy>
+     <route-policy-name>{{BGP_IN_NAME}}</route-policy-name>
+       <rpl-route-policy>route-policy {{BGP_IN_NAME}}
+         end-policy
+       </rpl-route-policy>
+      </route-policy>
+    </route-policies>
+  </routing-policy>
+</config>

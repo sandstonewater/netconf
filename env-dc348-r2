@@ -1,0 +1,24 @@
+## ASR Login Credentials
+export xr_mgmt="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+## List of Compute Endpoints
+export dc_vpod_name="DC306_CEE1_" ##NO SPACES!!
+export declare arr_Compute_IP=("10.19.4.118" "10.19.4.90" "10.19.4.106" "10.19.4.86" "10.19.4.134" "10.19.4.138" "10.19.4.150" "10.19.4.122" "10.19.4.154")
+export declare arr_Compute_Name=("c8c1-LAG" "c6c2-LAG" "c7c2-LAG" "c6c1-LAG" "c9c1-LAG" "c9c2-LAG" "c10c1-LAG" "c8c2-LAG" "c10c2-LAG")
+
+## Routing, MPLS and GRE parameters
+export static_route="" ##Only needed for Spine+Leaf setup
+export gre_src_add="192.168.51.2"
+export tunnel_base=34801
+export dummy_net="169.254.190.0/24"
+export mpls_label_base=202100
+
+## BGP parameters
+export csc_bgp_add="10.33.248.150"
+export bgp_in_policy=DC348_NH-WA-vPOD1 ##NO SPACES!!
+export bgp_out_policy=DC348_NH-WA-vPOD1 ##NO SPACES!!
+export bgp_us_int="Loopback3348"
+export bgp_local_as=100
+export bgp_csc_as=100

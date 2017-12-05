@@ -1,0 +1,13 @@
+## ASR IPs and Credentials
+export xr_mgmt1="localhost"
+export xr_mgmt2="localhost"
+export xr_port1=9001
+export xr_port2=9002
+
+export xr_user="admin"
+export xr_pass="ericsson"
+
+## List of VRFs
+export declare arr_VRF_names=("DC345_om_vr")
+export declare arr_VRF_rts=("100:3400")
+export declare arr_VRF_rds=("10.33.245.12:3400")

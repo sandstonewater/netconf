@@ -1,0 +1,34 @@
+<config>
+  <interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+  <interface-configuration>
+    <active>act</active>
+    <interface-name>{{TUN_NAME}}</interface-name>
+    <interface-virtual/>
+    <description>{{TUN_DESC}}</description>
+    <mtus>
+     <mtu>
+      <owner>tunnel-ip</owner>
+      <mtu>1528</mtu>
+     </mtu>
+    </mtus>
+    <ipv4-network xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-io-cfg">
+     <addresses>
+      <unnumbered>{{TUN_SRC_INT}}</unnumbered>
+     </addresses>
+    </ipv4-network>
+    <tunnel-ip xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-tunnel-gre-cfg">
+     <mode>
+      <value>1</value>
+     </mode>
+     <source>
+      <type>2</type>
+      <address>{{TUN_SRC_IP}}</address>
+     </source>
+     <destination>
+      <type>1</type>
+      <address>{{TUN_DEST}}</address>
+     </destination>
+    </tunnel-ip>
+   </interface-configuration>
+</interface-configurations>
+</config>

@@ -1,0 +1,12 @@
+export xr_mgmt1="10.80.247.173"
+export xr_mgmt2="10.80.247.174"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export INT_NAME="Bundle-Ether117.510"
+export INT_DESC="UDM_OAM_FEE_N8"
+export INT_VRF="VNF001"
+export INT_IP1="10.49.237.2"
+export INT_IP2="10.49.237.3"
+export INT_IP_MASK="255.255.255.248"
+export INT_VLAN="510"

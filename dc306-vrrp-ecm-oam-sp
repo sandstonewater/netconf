@@ -1,0 +1,10 @@
+export xr_mgmt1="10.80.244.51"
+export xr_mgmt2="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export INT_NAME="Bundle-Ether306.101"
+export VR_ID="101"
+export PRIO_R1="254"
+export PRIO_R2="200"
+export INT_IP="10.33.189.33"

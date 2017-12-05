@@ -1,0 +1,10 @@
+export xr_mgmt="10.80.244.52"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export INT_NAME="Bundle-Ether300.200"
+export INT_DESC="sdn_ul"
+export INT_VRF=""
+export INT_IP="10.4.0.252"
+export INT_IP_MASK="255.255.254.0"
+export INT_VLAN="200"

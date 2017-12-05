@@ -1,0 +1,21 @@
+<config>
+  <interface-configurations xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ifmgr-cfg">
+   <interface-configuration>
+    <active>act</active>
+    <interface-name>{{INT_NAME}}</interface-name>
+    <interface-virtual/>
+    <description>{{INT_DESC}}</description>
+    <mtus>
+     <mtu>
+      <owner>etherbundle</owner>
+      <mtu>9216</mtu>
+     </mtu>
+    </mtus>
+    <bundle xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-bundlemgr-cfg">
+     <minimum-active>
+      <links>1</links>
+     </minimum-active>
+    </bundle>
+   </interface-configuration>
+  </interface-configurations>
+</config>

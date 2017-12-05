@@ -1,0 +1,38 @@
+<config>
+  <mpls-static xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-mpls-static-cfg">
+   <enable/>
+   <interfaces>
+    <interface>
+     <interface-name>{{TUN_NAME}}</interface-name>
+    </interface>
+   </interfaces>
+   <default-vrf>
+    <afs>
+     <af>
+      <afi>ipv4-unicast</afi>
+      <enable/>
+      <local-labels>
+       <local-label>
+        <local-label-id>{{MPLS_LABEL}}</local-label-id>
+        <label-type>
+         <label-mode>per-prefix</label-mode>
+         <prefix>{{DUMMY_PREFIX}}</prefix>
+         <prefix-length>32</prefix-length>
+        </label-type>
+        <paths>
+         <path>
+          <path-id>1</path-id>
+          <path-type>cross-connect</path-type>
+          <label-type>pop</label-type>
+          <interface-name>{{TUN_NAME}}</interface-name>
+          <metric>0</metric>
+          <nh-mode>configured</nh-mode>
+         </path>
+        </paths>
+       </local-label>
+      </local-labels>
+     </af>
+    </afs>
+   </default-vrf>
+  </mpls-static>
+</config>

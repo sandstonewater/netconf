@@ -1,0 +1,24 @@
+<config>
+  <hsrp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-hsrp-cfg">
+   <interfaces>
+    <interface>
+     <interface-name>{{INT_NAME}}</interface-name>
+     <ipv4>
+      <version2>
+       <groups>
+        <group>
+         <group-number>{{VR_ID}}</group-number>
+         <preempt>90</preempt>
+         <priority>{{PRIO}}</priority>
+         <primary-ipv4-address>
+          <virtual-ip-learn>false</virtual-ip-learn>
+          <address>{{INT_IP}}</address>
+         </primary-ipv4-address>
+        </group>
+       </groups>
+      </version2>
+     </ipv4>
+    </interface>
+   </interfaces>
+  </hsrp>
+</config>

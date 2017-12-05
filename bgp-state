@@ -1,0 +1,14 @@
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <bgp xmlns="http://openconfig.net/yang/bgp">
+   <neighbors>
+    <neighbor>
+     <neighbor-address>10.33.189.147</neighbor-address>
+     <state>
+      <session-state>ACTIVE</session-state>
+     </state>
+    </neighbor>
+   </neighbors>
+  </bgp>
+ </data>
+
+

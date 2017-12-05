@@ -1,0 +1,74 @@
+<config>
+  <routing-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-policy-repository-cfg">
+   <route-policies>
+    <route-policy>
+     <route-policy-name>DC348_NH-WA-vPOD1</route-policy-name>
+     <rpl-route-policy>route-policy DC348_NH-WA-vPOD1
+         if next-hop in (10.19.4.102) then
+           set next-hop 169.254.190.10
+           pass
+         endif
+         if next-hop in (10.19.4.68) then
+           set next-hop 169.254.190.11
+           pass
+         endif
+         if next-hop in (10.19.4.76) then
+           set next-hop 169.254.190.12
+           pass
+         endif
+  if next-hop in (10.19.0.102) then
+    set next-hop 169.254.190.10
+    pass
+  endif
+  if next-hop in (10.19.0.68) then
+    set next-hop 169.254.190.11
+    pass
+  endif
+  if next-hop in (10.19.0.76) then
+    set next-hop 169.254.190.12
+    pass
+  endif
+  if next-hop in (10.19.0.118) then
+    set next-hop 169.254.190.1
+    pass
+  endif
+  if next-hop in (10.19.0.90) then
+    set next-hop 169.254.190.2
+    pass
+  endif
+  if next-hop in (10.19.0.106) then
+    set next-hop 169.254.190.3
+    pass
+  endif
+  if next-hop in (10.19.0.86) then
+    set next-hop 169.254.190.4
+    pass
+  endif
+  if next-hop in (10.19.0.134) then
+    set next-hop 169.254.190.5
+    pass
+  endif
+  if next-hop in (10.19.0.138) then
+    set next-hop 169.254.190.6
+    pass
+  endif
+  if next-hop in (10.19.0.150) then
+    set next-hop 169.254.190.7
+    pass
+  endif
+  if next-hop in (10.19.0.122) then
+    set next-hop 169.254.190.8
+    pass
+  endif
+  if next-hop in (10.19.0.154) then
+    set next-hop 169.254.190.9
+    pass
+  endif
+end-policy
+</rpl-route-policy>
+    </route-policy>
+   </route-policies>
+  </routing-policy>
+ </config>
+
+

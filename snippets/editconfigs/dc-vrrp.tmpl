@@ -1,0 +1,20 @@
+<config>
+  <vrrp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-vrrp-cfg">
+   <interfaces>
+    <interface>
+     <interface-name>{{INT_NAME}}</interface-name>
+     <ipv4>
+      <version2>
+       <virtual-routers>
+        <virtual-router>
+         <vr-id>{{VR_ID}}</vr-id>
+         <priority>{{PRIO}}</priority>
+         <primary-ipv4-address>{{INT_IP}}</primary-ipv4-address>
+        </virtual-router>
+       </virtual-routers>
+      </version2>
+     </ipv4>
+    </interface>
+   </interfaces>
+  </vrrp>
+</config>

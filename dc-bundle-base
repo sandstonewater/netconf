@@ -1,0 +1,10 @@
+export xr_mgmt1="10.80.247.173"
+export xr_mgmt2="10.80.247.174"
+export xr_user="admin"
+export xr_pass="ericsson"
+
+export BUNDLE_NAME="Bundle-Ether117"
+export BUNDLE_DESC="Bundle-to-Pluribus-for-VNF001" ##No spaces allowed!!!!####
+export declare arr_Bundle_Members=("TenGigE0/0/0/10")
+export INT_DESC="vnf_001"
+export BUNDLE_ID="117"

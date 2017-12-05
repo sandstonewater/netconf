@@ -1,0 +1,32 @@
+<config>
+  <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">
+   <instance>
+    <instance-name>default</instance-name>
+    <instance-as>
+     <as>0</as>
+     <four-byte-as>
+      <as>65000</as>
+      <bgp-running/>
+      <vrfs>
+       <vrf>
+        <vrf-name>{{VRF_NAME}}</vrf-name>
+        <vrf-global>
+         <exists/>
+         <route-distinguisher>
+          <type>auto</type>
+         </route-distinguisher>
+         <vrf-global-afs>
+          <vrf-global-af>
+           <af-name>ipv4-unicast</af-name>
+           <enable/>
+           <connected-routes/>
+          </vrf-global-af>
+         </vrf-global-afs>
+        </vrf-global>
+       </vrf>
+      </vrfs>
+     </four-byte-as>
+    </instance-as>
+   </instance>
+  </bgp>
+</config>
